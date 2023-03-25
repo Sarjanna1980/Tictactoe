@@ -7,10 +7,6 @@ VAL2 = "O"
 first_player = input('Name of first player: ')
 second_player = input('Name of second player: ')
 
-
-
-
-
 def init_mat():
     matrix = [
     [' ', ' ', ' '],
