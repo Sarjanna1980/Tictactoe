@@ -7,6 +7,10 @@ VAL2 = "O"
 first_player = input('Name of first player: ')
 second_player = input('Name of second player: ')
 
+
+
+
+
 def init_mat():
     matrix = [
     [' ', ' ', ' '],
@@ -15,11 +19,13 @@ def init_mat():
     ]
     return matrix
 
-def reset_game(matrix):
+def reset_game():
     print(f'{first_player} Win')
     reset = input('Do you want to restart the game?: (Y/N)')
     if reset == 'Y' or reset =='y':
-        matrix = init_mat()
+        for i in range(3):
+            for j in range(3):
+             matrix[i][j] = " "
     elif reset == 'N' or reset =='n':
         print('Game over')
         exit()
@@ -70,7 +76,8 @@ while True:
     play(first_player, VAL1)
     game(matrix)
     if check_win(matrix, VAL1):
-        reset_game(matrix)
+        reset_game()
+        continue
     play(second_player, VAL2)
     if check_win(matrix, VAL1):
-        reset_game(matrix)
+        reset_game()
