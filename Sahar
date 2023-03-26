@@ -54,11 +54,7 @@ def play(player_name, val):
     else:
         matrix[row][column] = val
 
-def is_valid_input():
-    if not 0 <= row <= 2:
-        print('Invalid value Please enter values between 0 and 2')
-        game(matrix)
-        play(player_name, val)
+
 
 
 def check_win(matrix, val):
