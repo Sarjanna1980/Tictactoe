@@ -9,29 +9,28 @@ second_player = input('Name of second player: ')
 
 def init_mat():  # פונקציה ציור של הלוח
     matrix = [
-        ['O', 'O', 'X'],
-        [' ', 'X', 'O'],
-        ['O', 'X', 'X']
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+        [' ', ' ', ' ']
     ]
     return matrix
 
-def Win(): # הכרזת ניצחון ואיתחול 
+def Win():  # הכרזת ניצחון ואיתחול
     print(f'{first_player} Win')
     reset_game()
 
-def check_for_tie(matrix): # בדיקת תיקו ואיתחול
+def check_for_tie(matrix):  # בדיקת תיקו ואיתחול
     for row in matrix:
         for cell in row:
             if cell == " ":
-             # if there is at least one empty cell, the game is not a tie
+                # if there is at least one empty cell, the game is not a tie
                 return False
-     # if all cells are filled and there is no winner, the game is a tie
+    # if all cells are filled and there is no winner, the game is a tie
     print("Tie")
     reset_game()
     game(matrix)
 
-def reset_game(): # איתחול משחק
-
+def reset_game():  # איתחול משחק
     reset = input('Do you want to restart the game?: (Y/N)')
     if reset == 'Y' or reset == 'y':
         for i in range(3):
@@ -43,7 +42,7 @@ def reset_game(): # איתחול משחק
     else:
         print('choose is not correct exiting from the game')
 
-def game(matrix): #   פונקציה מדפיסה לוח אם שינוי
+def game(matrix):  # פונקציה מדפיסה לוח אם שינוי
     for row in matrix:
         print(row)
 
@@ -56,14 +55,14 @@ def play(player_name, val):  # פונקציה של מהלך המשחק ובדי�
         play(player_name, val)
 
     elif matrix[row][column] != " ":
-            print("Position already taken, try again")
-            game(matrix)
-            play(player_name, val)
+        print("Position already taken, try again")
+        game(matrix)
+        play(player_name, val)
 
     else:
         matrix[row][column] = val
 
-def check_win(matrix, val):  #פונקציה בדיקת נצחון
+def check_win(matrix, val):  # פונקציה בדיקת נצחון
     # הורזנטלי
     for row in matrix:
         if row[0] == row[1] == row[2] and row[0] == val:
@@ -79,10 +78,10 @@ def check_win(matrix, val):  #פונקציה בדיקת נצחון
         return True
 
     if matrix[0][2] == matrix[1][1] == matrix[2][0] and matrix[0][2] == val:
-
         return True
-    
+
     return False
+
 
 matrix = init_mat()  # גוף הקוד
 while True:
@@ -91,10 +90,8 @@ while True:
     game(matrix)
     if check_win(matrix, VAL1):
         Win()
-        continue
     check_for_tie(matrix)
     play(second_player, VAL2)
     if check_win(matrix, VAL1):
         Win()
-        continue
     check_for_tie(matrix)
