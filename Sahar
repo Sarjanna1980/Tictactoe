@@ -1,6 +1,13 @@
 import math
 import array
 
+print("         Tic Tac Toe")  #הצגת משחק ולוח
+print("           column")
+print("         0    1    2")
+print(" row 0 [' ', ' ', ' ']")
+print(" row 1 [' ', ' ', ' ']")
+print(" row 2 [' ', ' ', ' ']")
+
 # מטריצה 3 על 3
 VAL1 = "X"
 VAL2 = "O"
