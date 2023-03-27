@@ -9,17 +9,31 @@ first_player = input('Name of first player: ')
 second_player = input('Name of second player: ')
 
 
-def init_mat():
+def init_mat():  # פונקציה ציור של הלוח
     matrix = [
-        [' ', ' ', ' '],
-        [' ', ' ', ' '],
-        [' ', ' ', ' ']
+        ['O', 'O', 'X'],
+        [' ', 'X', 'O'],
+        ['O', 'X', 'X']
     ]
     return matrix
 
-
-def reset_game():
+def Win(): # הכרזת ניצחון ואיתחול 
     print(f'{first_player} Win')
+    reset_game()
+
+def check_for_tie(matrix): # בדיקת תיקו ואיתחול
+    for row in matrix:
+        for cell in row:
+            if cell == " ":
+             # if there is at least one empty cell, the game is not a tie
+                return False
+     # if all cells are filled and there is no winner, the game is a tie
+    print("Tie")
+    reset_game()
+    game(matrix)
+
+def reset_game(): # איתחול משחק
+
     reset = input('Do you want to restart the game?: (Y/N)')
     if reset == 'Y' or reset == 'y':
         for i in range(3):
@@ -32,13 +46,13 @@ def reset_game():
         print('choose is not correct exiting from the game')
 
 
-def game(matrix):
+def game(matrix): #   פונקציה מדפיסה לוח אם שינוי
     for row in matrix:
         print(row)
 
 
 
-def play(player_name, val):
+def play(player_name, val):  # פונקציה של מהלך המשחק ובדיקת ערך שהוכנס תקין
     row = int(input(f'{player_name} choose row from 0 to 2: '))
     column = int(input(f'{player_name} choose column from 0 to 2: '))
     if not 0 <= row <= 2 or not 0 <= column <= 2:
@@ -56,37 +70,40 @@ def play(player_name, val):
 
 
 
-
-def check_win(matrix, val):
-    # Check horizontal wins
+def check_win(matrix, val):  #פונקציה בדיקת נצחון
+    # הורזנטלי
     for row in matrix:
         if row[0] == row[1] == row[2] and row[0] == val:
             return True
 
-    # Check vertical wins
+    # ורטקלי
     for column in range(3):
         if matrix[0][column] == matrix[1][column] == matrix[2][column] and matrix[0][column] == val:
             return True
 
-    # Check diagonal wins
+    # שני אלכסונים
     if matrix[0][0] == matrix[1][1] == matrix[2][2] and matrix[0][0] == val:
         return True
 
     if matrix[0][2] == matrix[1][1] == matrix[2][0] and matrix[0][2] == val:
-        return True
 
-    # No winner
+        return True
+    
     return False
 
 
-matrix = init_mat()
+
+matrix = init_mat()  # גוף הקוד
 while True:
     game(matrix)
     play(first_player, VAL1)
     game(matrix)
     if check_win(matrix, VAL1):
-        reset_game()
+        Win()
         continue
+    check_for_tie(matrix)
     play(second_player, VAL2)
     if check_win(matrix, VAL1):
-        reset_game()
+        Win()
+        continue
+    check_for_tie(matrix)
