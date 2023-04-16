@@ -1,0 +1,23 @@
+import requests
+
+class MyUser:
+    def __init__(self, id, email, username, name):
+        self.id = id
+        self.email = email
+        self.username = username
+        self.name = name
+
+    def __str__(self):
+        return f"ID: {self.id}\nEmail: {self.email}\nUsername: {self.username}\nName: {self.name}"
+
+def find_user(name):
+    response = requests.get("https://jsonplaceholder.typicode.com/users")
+    users_data = response.json()
+    for user_data in users_data:
+        if user_data["name"] == name:
+            return MyUser(user_data["id"], user_data["email"], user_data["username"], user_data["name"])
+    return "User not found."
+
+name = input("Enter name: ")
+user = find_user(name)
+print(user) if isinstance(user, MyUser) else print(user)
